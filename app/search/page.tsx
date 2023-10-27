@@ -2,7 +2,7 @@ import Header from "./components/Header";
 import SearchSideBar from "./components/SearchSideBar";
 import RestaurantCard from "./components/RestaurantCard";
 import { Metadata, NextPage, NextPageContext } from "next";
-import { Cuisine, Location, PRICE, PrismaClient } from "@prisma/client";
+import { Cuisine, Location, PRICE, PrismaClient, Review } from "@prisma/client";
 
 export const metadata: Metadata = {
   title: "Search result",
@@ -16,6 +16,7 @@ export interface IFoundRestaurant {
   cuisine: Cuisine;
   slug: string;
   main_image: string;
+  reviews: Review[];
 }
 
 export interface ISearchParams {
@@ -64,6 +65,7 @@ const fetchRestaurantsByLocation = async (
     cuisine: true,
     slug: true,
     main_image: true,
+    reviews: true,
   };
 
   if (!city)
